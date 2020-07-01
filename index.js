@@ -11,8 +11,14 @@ const app = express();
 const port = 8000;
 
 
-//...5 importing router from routes
+//...5 importing router from routes this router will be used if any request is coming denoted by / tthat is this route handle th home
 app.use('/', require('./routes'));
+
+//...6 if any further request comes in than simply render it from router files which we have to acquire kyki jab request user se aiegi to simply vo acquire karo jismee ye h i.e this route handle the acquire
+app.use('/users', require('./routes/user_router'))
+
+// simply agar or bhi route request ko handle karne h to ye karo
+// router.use('/pagename', require('./ etc mtlb us address ke route me jaha ye bana h vaha i.e routerfile'))
 
 
 //...4 ab hume ye bhi handle karna h ki error aie agar server na chale to kya msg de jise pata chale ki chal rha h ya nhi
