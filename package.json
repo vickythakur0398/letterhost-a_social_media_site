@@ -1,0 +1,18 @@
+{
+  "name": "letterhost",
+  "version": "1.0.0",
+  "description": "this is my first social media website while learning web dev",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js"
+  },
+  "author": "vickythakur0398",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  },
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
