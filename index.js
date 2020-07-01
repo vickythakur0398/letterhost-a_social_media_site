@@ -21,6 +21,14 @@ app.use('/users', require('./routes/user_router'))
 // router.use('/pagename', require('./ etc mtlb us address ke route me jaha ye bana h vaha i.e routerfile'))
 
 
+//....7 after installing npm install ejs for view engine we have 2 work one is to qcquire it and other is same as we are doing it for views do path to uska batana hoga 
+app.set('view engine', 'ejs');
+//path jo ki views me html sabske page honge usko access krne kelie
+app.set('views' , '/views');
+
+
+
+
 //...4 ab hume ye bhi handle karna h ki error aie agar server na chale to kya msg de jise pata chale ki chal rha h ya nhi
 app.listen(port, function(err){
     if(err){
