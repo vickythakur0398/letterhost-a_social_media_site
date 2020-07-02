@@ -4,6 +4,8 @@
             <%= title %>
         </title>
         <link rel = "stylesheet" href="/css/layout.css">
+        <!-- adding so that head me style jae jis bhi router ya connection ka ho -->
+        <%- style %>
     </head>
     <body>
         <%- include('_header'); %>
@@ -13,5 +15,8 @@
         <%- body  %>
 
         <%- include('_footer'); %>
+        <!-- this is for js script -->
+        <%- script %>
+
     </body>
 </html>

@@ -15,10 +15,17 @@ const expressLayouts =require('express-ejs-layouts');
 //here we have to use it before router kyuki router hi to call kar rha h views vagearh ko to use to pehle hi dalna hoga i.e got a tell our server to use it
 app.use(expressLayouts);
 
+
+//...9 here we want ki our script and style sheets must went to the head of the body so for that we are writing this is available in the expressejs documentation after doing this we have to add <%- style %> above to add that in head and <%- script %> below thattto add js script i.e to extract styles and scripts from sub pages into ;layout
+app.set(`layout extractStyles`,  true);
+app.set(`layout extractScripts`,  true);
+
+
 //asett folder me static file ke lie
 app.use(express.static('./assets'));
 
 //...5 importing router from routes this router will be used if any request is coming denoted by / tthat is this route handle th home
+app.use('/', require('./routes'));
 
 
 //...6 if any further request comes in than simply render it from router files which we have to acquire kyki jab request user se aiegi to simply vo acquire karo jismee ye h i.e this route handle the acquire
@@ -34,7 +41,6 @@ app.set('view engine', 'ejs');
 app.set('views' , './views');
 
 
-app.use('/', require('./routes'));
 
 //...4 ab hume ye bhi handle karna h ki error aie agar server na chale to kya msg de jise pata chale ki chal rha h ya nhi
 app.listen(port, function(err){
