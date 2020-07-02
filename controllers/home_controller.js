@@ -3,6 +3,11 @@
 module.exports.home = function(req,  res){
     
     
-    return res.end('<h1>express is working on our letterhost</h1>')
+    // return res.end('<h1>express is working on our letterhost</h1>')
+
+    //now we want ki view ko ye render kare na ki ye bheje to uppar wala commented  or humne acess view ka main index wale me previous step me de dia tha git me dekh lio 
+    return res.render('home',{
+        title: "hii "
+    });
 }
 
