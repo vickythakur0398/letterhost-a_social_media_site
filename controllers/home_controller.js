@@ -7,7 +7,7 @@ module.exports.home = function(req,  res){
 
     //now we want ki view ko ye render kare na ki ye bheje to uppar wala commented  or humne acess view ka main index wale me previous step me de dia tha git me dekh lio 
     return res.render('home',{
-        title: "hii "
+        title: "hii"
     });
 }
 
