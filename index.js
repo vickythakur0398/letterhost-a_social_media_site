@@ -10,6 +10,9 @@ const app = express();
 //..2  jis port pw chalega or production me 8080 pe chalta h 
 const port = 8000;
 
+//....10 acquiring mongoosedb
+const db = require('./config/mongoose');
+
 //...8 after downloading the install express js layout useing npm install express-js-layouts we have to acquire it and use it in app 
 const expressLayouts =require('express-ejs-layouts');
 //here we have to use it before router kyuki router hi to call kar rha h views vagearh ko to use to pehle hi dalna hoga i.e got a tell our server to use it
