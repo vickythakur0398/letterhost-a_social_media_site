@@ -1,6 +1,7 @@
 //....1  after using npm install on terminal we have  to acquire express which is already installed 
 //here we have used const because we dont want ki koi ise overwrite kar de thats why we usually use const
 const express = require('express');
+const cookieParser = require('cookie-parser');
 
 
 
@@ -17,7 +18,6 @@ const db = require('./config/mongoose');
 const expressLayouts =require('express-ejs-layouts');
 const { urlencoded } = require('express');
 const { use } = require('./routes');
-const cookieParser = require('cookie-parser');
 //here we have to use it before router kyuki router hi to call kar rha h views vagearh ko to use to pehle hi dalna hoga i.e got a tell our server to use it
 app.use(expressLayouts);
 

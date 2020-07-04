@@ -11,7 +11,7 @@ const db = mongoose.connection
 
 
 // whenever there is error than or not than
-db.on(`erroe`, console.error.bind(console, `error in connecting to mongodb`));
+db.on(`error`, console.error.bind(console, `error in connecting to mongodb`));
 
 db.once(`open`, function(){
     console.log(`connected to database:: mongodb`)

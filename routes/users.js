@@ -10,14 +10,14 @@ const user_controller = require('../controllers/user_controllers');
 
 console.log('router loaded');
 // if we want to acces this router this router has expoerted itself so to acces this we can access via index,js main kyuki use ne to ise acquire kia h
-router.get('/profile', user_controller.profile );
+router.get('/profile', user_controller.profile);
 
 //here we are getting from the sgnup and sign in
 router.get('/sign-up', user_controller.signUp);
 router.get('/sign-in', user_controller.signIn);
 
 //this is routing to the action i.e user/create
-router.post('/create',user_controller.createACCOUNT);
+router.post('/create',user_controller.create);
 // this is we are routing to sign in and action is /user/user-session
-router.post('/user-session',user_controller.userSession);
+router.post('/create-session',user_controller.createSession); 
 module.exports = router;

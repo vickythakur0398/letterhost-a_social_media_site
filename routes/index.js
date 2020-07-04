@@ -17,7 +17,7 @@ console.log(`router is loaded`)
 //..6 to control the action of homecontoller which we have imported from the contollers
 router.get('/', homeController.home);
 
-router.use('/users', require('./user_router'));
+router.use('/users', require('./users'));
 
 
 

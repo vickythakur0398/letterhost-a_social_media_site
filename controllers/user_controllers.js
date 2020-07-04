@@ -6,10 +6,27 @@ module.exports.profile = function(req, res){
     res.end(`<h1>This is user profile</h1>`)
 }
 */
+
+/*
 return res.render('profile',{
     // title: "wooohhh taking a break "
     title: 'user profile'
-});
+});*/
+// ye hum show karne ke lie kar rhe h user details 
+    if(req.cookies.user_id){
+        User.findById(req.cookies.user_id, function(err, user){
+            if(user){
+                return res.render('user_profile',{
+                    title: "User Profile",
+                    user:user
+                })
+            }
+            return res.redirect(`users/sign-in`);
+        });
+    }else{
+        return res.redirect(`users/sign-in`);
+    }
+
 }
 
 
@@ -30,7 +47,7 @@ module.exports.signIn = function(req, res){
 }
 
 //jo humne sign up form banaya h uska bhi router chaie to uska controller h ye  i.e to get the signup dta in database
-module.exports.createACCOUNT = function(req, res){
+module.exports.create = function(req, res){
 
     // console.log('hii', req.body.confirmpassword);
     // res.redirect('back')   // tm yahi se back ho ja rhe the so error tha 
@@ -42,7 +59,7 @@ module.exports.createACCOUNT = function(req, res){
         return res.redirect('back');
     }
 
-    console.log('email',req.body.email);
+    // console.log('email',req.body.email);
 
     User.findOne({email: req.body.email}, function(err, user){
         if(err){console.log('error in finding user in our database '); 
@@ -67,8 +84,9 @@ module.exports.createACCOUNT = function(req, res){
     
 }
 
+
 // this is for singin to get that data
-module.exports.create = function(req, res){
+module.exports.createSession = function(req, res){
     //will do it
     //so after doing user sign up we are proceeding with the user sing in 
     //we are going to check if the user exist if yes than match password with the password in the database if that matchess than we stores the user identity in the cookie and send it off fto the browser
@@ -78,18 +96,20 @@ module.exports.create = function(req, res){
         if(err){console.log(`error in finding the user in signing in`); return};
 
             //handle user found
-
+console.log("user",user)
             if(user){
                 //handle if password doesnt matches
                 if(user.password != req.body.password){
+                    console.log("password wrong")
                     return res.redirect(`back`);
                 }
 
 
                 //if passowrd matches
                 //we have to handle session create
-                res.cookie(`user_id` , user.id);
-                return res.redirect(`/users/profile`);
+                res.cookie('user_id' , user._id);
+                console.log(user.id)
+                return res.redirect('/users/profile');
 
 
             }
@@ -97,7 +117,7 @@ module.exports.create = function(req, res){
 
             else{
                 //handle if user not found
-
+                console.log("else");
                 return res.redirect(`back`);
             }
 
@@ -106,7 +126,7 @@ module.exports.create = function(req, res){
     });
 
 }
-
-module.exports.userSession = function(req,res){
-    return res.redirect('/');
-}
+//this is must to export userSession or iske bad humne dekha ki jo user h uski detail s kya h to vo show kare uske profile me to iske lie humne user profile me change kia h upar 
+// module.exports.userSession = function(req,res){
+//     return res.redirect('/users/user_profile');
+// }
