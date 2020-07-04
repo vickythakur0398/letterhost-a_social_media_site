@@ -1,3 +1,5 @@
+const User = require("../models/user");
+
 //same jo baki me kai tha ek function banaya h or use export krna h jise ki roy=te me use kar skae
 module.exports.profile = function(req, res){
     /*
@@ -28,8 +30,40 @@ module.exports.signIn = function(req, res){
 }
 
 //jo humne sign up form banaya h uska bhi router chaie to uska controller h ye  i.e to get the signup dta in database
-module.exports.create = function(req, res){
+module.exports.createACCOUNT = function(req, res){
+
+    // console.log('hii', req.body.confirmpassword);
+    // res.redirect('back')   // tm yahi se back ho ja rhe the so error tha 
     //will do it 
+    //s1 if confirm pass word and password is correct
+    
+    if(req.body.password != req.body.confirmpassword){   
+        // console.log("not same password");
+        return res.redirect('back');
+    }
+
+    console.log('email',req.body.email);
+
+    User.findOne({email: req.body.email}, function(err, user){
+        if(err){console.log('error in finding user in our database '); 
+        return}
+
+        // if user is not there create account
+        if(!user){
+            User.create(req.body, function(err, user){
+                if(err){
+                    console.log('error in creating user'); 
+                    return;
+                }
+                // here we have redirected it to form 
+                return res.redirect('/users/sign-in');
+            })
+        }else{
+            return res.redirect('back');
+        }
+        // crux if password wont match or user is already present in both cases we are sending it back 
+        // else just redirected to the sign page now we have to rote it as route is already mention in action of form we just have to match that in routes file of user
+    });
     
 }
 

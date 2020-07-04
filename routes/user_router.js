@@ -4,7 +4,7 @@ const express = require('express');
 
 const router = express.Router();
 
-const user_controller = require('../controllers/user_controllers' )
+const user_controller = require('../controllers/user_controllers');
 
 
 
@@ -15,5 +15,8 @@ router.get('/profile', user_controller.profile );
 //here we are getting from the sgnup and sign in
 router.get('/sign-up', user_controller.signUp);
 router.get('/sign-in', user_controller.signIn);
+
+//this is routing to the action i.e user/create
+router.post('/create',user_controller.createACCOUNT);
 
 module.exports = router;

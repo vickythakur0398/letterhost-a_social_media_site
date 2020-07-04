@@ -15,8 +15,16 @@ const db = require('./config/mongoose');
 
 //...8 after downloading the install express js layout useing npm install express-js-layouts we have to acquire it and use it in app 
 const expressLayouts =require('express-ejs-layouts');
+const { urlencoded } = require('express');
+const { use } = require('./routes');
+const cookieParser = require('cookie-parser');
 //here we have to use it before router kyuki router hi to call kar rha h views vagearh ko to use to pehle hi dalna hoga i.e got a tell our server to use it
 app.use(expressLayouts);
+
+//......11 here we are using to get object value of our need when  we post it 
+app.use(express.urlencoded());
+//...12  as we have installef npm install -cookie-parser so now we have to acquire that and use it 
+app.use(cookieParser());
 
 
 //...9 here we want ki our script and style sheets must went to the head of the body so for that we are writing this is available in the expressejs documentation after doing this we have to add <%- style %> above to add that in head and <%- script %> below thattto add js script i.e to extract styles and scripts from sub pages into ;layout
