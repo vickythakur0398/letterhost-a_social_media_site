@@ -18,5 +18,6 @@ router.get('/sign-in', user_controller.signIn);
 
 //this is routing to the action i.e user/create
 router.post('/create',user_controller.createACCOUNT);
-
+// this is we are routing to sign in and action is /user/user-session
+router.post('/user-session',user_controller.userSession);
 module.exports = router;

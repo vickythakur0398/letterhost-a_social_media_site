@@ -70,5 +70,43 @@ module.exports.createACCOUNT = function(req, res){
 // this is for singin to get that data
 module.exports.create = function(req, res){
     //will do it
+    //so after doing user sign up we are proceeding with the user sing in 
+    //we are going to check if the user exist if yes than match password with the password in the database if that matchess than we stores the user identity in the cookie and send it off fto the browser
+    //steps to authenticate the user
+    // find the user
+    User.findOne({email: req.body.email}, function(err, user){
+        if(err){console.log(`error in finding the user in signing in`); return};
 
+            //handle user found
+
+            if(user){
+                //handle if password doesnt matches
+                if(user.password != req.body.password){
+                    return res.redirect(`back`);
+                }
+
+
+                //if passowrd matches
+                //we have to handle session create
+                res.cookie(`user_id` , user.id);
+                return res.redirect(`/users/profile`);
+
+
+            }
+
+
+            else{
+                //handle if user not found
+
+                return res.redirect(`back`);
+            }
+
+
+
+    });
+
+}
+
+module.exports.userSession = function(req,res){
+    return res.redirect('/');
 }
