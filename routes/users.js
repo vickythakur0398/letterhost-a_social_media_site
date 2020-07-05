@@ -16,7 +16,7 @@ router.get('/profile', user_controller.profile);
 router.get('/sign-up', user_controller.signUp);
 router.get('/sign-in', user_controller.signIn);
 
-//this is routing to the action i.e user/create
+//this is routing to the action i.e user/create kar
 router.post('/create',user_controller.create);
 // this is we are routing to sign in and action is /user/user-session
 router.post('/create-session',user_controller.createSession); 
