@@ -14,6 +14,17 @@ const port = 8000;
 //....10 acquiring mongoosedb
 const db = require('./config/mongoose');
 
+//.....13 we have to install npm install express-session as we have user passport library and we knew that serializing and deserilizing cocept related to cookies but that encryption is not done by passport for that we uses express session library going to do that  or passport local startegy usko bhi acquire  kia h
+const session = require(`express-session`); 
+const passport = require('passport');
+const passportLocal = require('./config/passport-local-strategy');
+
+//...14 now we have to add a middleware which takes the cookies and encrypt it but we have to do it after the views niche dekh lio
+
+
+
+
+
 //...8 after downloading the install express js layout useing npm install express-js-layouts we have to acquire it and use it in app 
 const expressLayouts =require('express-ejs-layouts');
 const { urlencoded } = require('express');
@@ -35,8 +46,6 @@ app.set(`layout extractScripts`,  true);
 //asett folder me static file ke lie
 app.use(express.static('./assets'));
 
-//...5 importing router from routes this router will be used if any request is coming denoted by / tthat is this route handle th home
-app.use('/', require('./routes'));
 
 
 //...6 if any further request comes in than simply render it from router files which we have to acquire kyki jab request user se aiegi to simply vo acquire karo jismee ye h i.e this route handle the acquire
@@ -50,6 +59,38 @@ app.use('/', require('./routes'));
 app.set('view engine', 'ejs');
 //path jo ki views me html sabske page honge usko access krne kelie
 app.set('views' , './views');
+
+
+//...14 now we have to add a middleware which takes the cookies and encrypt it but we have to do it after the views niche dekh lio we are using express-session but we have stored it in variable session
+app.use(session({
+    name: 'letterhost',
+    //TODO change the secret before deployement in production node
+
+    secret :'blahsomething',
+    saveUninitialized: false,
+    resave : false,
+    //no how much time later we want it to expire
+    cookie:{
+        maxAge:(1000*60*100)
+    }
+
+
+
+}));
+
+
+
+//..15 we need to tell the app to use passport and session names of variable 
+app.use(passport.initialize());
+app.use(passport.session());
+//now we have to change the user controller
+
+app.use(passportLocal.setAuthenticateUser);
+
+//...5 importing router from routes this router will be used if any request is coming denoted by / tthat is this route handle th home 
+//.isko bad me yaha dalna pada h kyuki ye passporrt ke baad aana chaie
+app.use('/', require('./routes'));
+
 
 
 

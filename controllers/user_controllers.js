@@ -13,19 +13,23 @@ return res.render('profile',{
     title: 'user profile'
 });*/
 // ye hum show karne ke lie kar rhe h user details 
-    if(req.cookies.user_id){
-        User.findById(req.cookies.user_id, function(err, user){
-            if(user){
+    // if(req.cookies.user_id){
+    //     User.findById(req.cookies.user_id, function(err, user){
+    //         if(user){
+    //             console.log("user",user);
                 return res.render('user_profile',{
-                    title: "User Profile",
-                    user:user
-                })
-            }
-            return res.redirect(`users/sign-in`);
-        });
-    }else{
-        return res.redirect(`users/sign-in`);
-    }
+                    title : "profile"
+                });
+    //             ,{
+    //                 title: "User Profile",
+    //                 user:user
+    //             })
+    //         }
+    //         return res.redirect(`users/sign-in`);
+    //     });
+    // }else{
+    //     return res.redirect(`users/sign-in`);
+    // }
 
 }
 
@@ -84,9 +88,9 @@ module.exports.create = function(req, res){
     
 }
 
-
+/*
 // this is for singin to get that data
-module.exports.createSession = function(req, res){
+module.exports.create = function(req, res){
     //will do it
     //so after doing user sign up we are proceeding with the user sing in 
     //we are going to check if the user exist if yes than match password with the password in the database if that matchess than we stores the user identity in the cookie and send it off fto the browser
@@ -126,7 +130,13 @@ console.log("user",user)
     });
 
 }
-//this is must to export userSession or iske bad humne dekha ki jo user h uski detail s kya h to vo show kare uske profile me to iske lie humne user profile me change kia h upar 
-// module.exports.userSession = function(req,res){
-//     return res.redirect('/users/user_profile');
-// }
+*/
+//after  installing passport and acquiring and all in the main index
+//ye sign in and create a session for the user
+//upar wala jo /* */ isme h vo manual authentication the jise branch me commit karna tha par isme bhi ho gya tha 
+
+module.exports.createSession = function(req, res){
+    //assumeing that user is already sign in the user will be redirected to it
+    return res.redirect('/users/profile');
+    //now go to routes user
+}

@@ -1,3 +1,4 @@
+
 // to require passport
 const passport = require(`passport`);
 //ye khud import ho jata h jab bhi hum User. likhte h to 
@@ -55,15 +56,25 @@ passport.use(new LocalStrategy ({
   //deserializing the iser from the key in the cookies
 
   //now the cookie is sent to the browser and when the browser makes the request the cookie is sent back the cookie so we need to deserialize it
-  passport.deserializeUser(function(user, done){
-      user.findOne(id, function(err, user){
+  passport.deserializeUser(function(id, done){
+      User.findById(id , function(err, user){
           if(err){
               console.log(`error in finding user`);
+              return;
           }
 
           return done(null, user);
       } );
   });
 
-  // exporting is the must step after all the efforts
-  module.exports =passport; //we are only exporting the passport not strategy 
+passport.setAuthenticateUser = function(req,res,next){
+    if(req.isAuthenticated()){
+        res.locals.user = req.user
+    }
+    next();
+}
+
+  // exporting 
+  module.exports = passport; 
+  //we are only exporting the passport not strategy 
+  

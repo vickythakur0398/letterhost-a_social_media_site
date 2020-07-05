@@ -4,6 +4,9 @@ const express = require('express');
 
 const router = express.Router();
 
+//ab passport se sign in karna h to we have acquore it
+const passport = require(`passport`);
+
 const user_controller = require('../controllers/user_controllers');
 
 
@@ -18,6 +21,21 @@ router.get('/sign-in', user_controller.signIn);
 
 //this is routing to the action i.e user/create kar
 router.post('/create',user_controller.create);
+
+/*
+
 // this is we are routing to sign in and action is /user/user-session
 router.post('/create-session',user_controller.createSession); 
+
+*/
+
+// jo upar /* */ me h vo hume local branch me kia tha but by mistake it is also committed in the master barnch vo maual sign in authentication ke lie tha 
+
+// this is by using passport as a middleware to authenticate in middle 
+//action of form se match h
+router.post(`/create-session` ,passport.authenticate(
+    `local`,
+    {failureRedirect: '/users/sign-in'},
+
+) , user_controller.createSession);
 module.exports = router;
